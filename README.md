@@ -1,7 +1,12 @@
 Test REST api server using expresso and json-schema
 
-Usage:
+Install:
+--------
 
+    npm install https://github.com/zxcabs/node-rest-test/tarball/master
+
+Usage:
+------
     test.get(url|func, data|func, schema|func);
 
 * first argumet: url or function (prevServerResponse) { return url; }
