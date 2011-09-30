@@ -4,9 +4,9 @@ Usage:
 
     test.get(url|func, data|func, schema|func);
 
-*first argumet: url or function (prevServerResponse) { return url; }
-*second argument: data or function function (prevServerResponse) { return data; }
-*third argument: validate schema or function (prevServerResponse) { return schema; }
+* first argumet: url or function (prevServerResponse) { return url; }
+* second argument: data or function function (prevServerResponse) { return data; }
+* third argument: validate schema or function (prevServerResponse) { return schema; }
 
 Also you can use:
 
@@ -17,7 +17,6 @@ Also you can use:
 and
 
     .end(fn);
-
 
 Example:
 -------
