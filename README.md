@@ -58,3 +58,8 @@ Example:
             );
         }
 	};
+
+
+Run test:
+
+    expresso <test file>
