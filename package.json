@@ -5,7 +5,7 @@
 	"description": "Test your REST server, using expresso and JSON-Schema",
 	"dependencies": {
 		"async": ">= 0.1.10",
-		"json-schema": "https://github.com/kriszyp/json-schema/tarball/master"
+		"JSV": "https://github.com/garycourt/JSV/tarball/master"
 	},
 	"keywords": ["rest", "schema", "test", "json"],
 	"repository": "https://github.com/zxcabs/node-rest-test",
