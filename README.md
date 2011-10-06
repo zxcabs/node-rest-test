@@ -7,11 +7,12 @@ Install:
 
 Usage:
 ------
-    test.get(url|func, data|func, schema|func);
+    test.get(url|func, data|func, schema|func [, callback]);
 
 * first argumet: url or function (prevServerResponse) { return url; }
 * second argument: data or function function (prevServerResponse) { return data; }
 * third argument: validate schema or function (prevServerResponse) { return schema; }
+* fourth argument: called when request completed. function (req, res) { ... };
 
 Also you can use:
 
