@@ -23,8 +23,8 @@ and
 
     .end(fn);
 
-Example:
--------
+Example 1:
+---------
 
     var assert = require('assert'),
         app = require('service/server/index.js'),
@@ -36,13 +36,13 @@ Example:
 
             tests.post('/sessions', { login: 'fedor@nikulin.ru', password: '1234' }, 
                 { 
-                    success: { type: Boolean, enum: [true]},
+                    success: { type: 'boolean', enum: [true]},
                     result: { 
-                        type: Object,
+                        type: 'object',
                         properties: {
                             sid: {
-                                type: String,
-                                pattern: /[\w\d\.\/\+=]{68}/
+                                type: 'string',
+                                pattern: '[\\w\\d\.\\/\\+=]{68}'
                             }
                          }
                      }
@@ -52,18 +52,76 @@ Example:
                  return '/sessions/' + res.body.result.sid;
              }, {}, {
                         success: {
-                            type: Boolean,
+                            type: 'boolean',
                             enum: [true]
                         },
                         result: {
-                            type: String,
-                            pattern: /session destroyed/
+                            type: 'string',
+                            pattern: 'session destroyed'
                        }
                     }
             );
         }
-	};
+    };
 
+
+Example 2:
+---------
+
+    var app = require('service/server/index.js'),
+        Rest = require('node-rest-test');
+
+    module.exports = {
+        'session': function (beforeExit, assert) {
+            var tests = new Rest(app);
+
+            tests.post('/sessions', { login: 'fedor@nikulin.ru', password: '1234' }, 
+                { 
+                    success: { type: 'boolean', enum: [true]},
+                    result: { 
+                        type: 'object',
+                        properties: {
+                            sid: {
+                                type: 'string',
+                                pattern: '[\\w\\d\\.\\/\\+=]{68}'
+                            }
+                         }
+                     }
+                 }
+             )
+             .del(function(res) {
+                 return '/sessions/' + res.body.result.sid;
+             }, {}, {
+                        success: {
+                            type: 'boolean',
+                            enum: [true]
+                        },
+                        result: {
+                            type: 'string',
+                            pattern: 'session destroyed'
+                       }
+                    }
+            )
+            .end(beforeExit, assert);
+        }
+    };
+
+
+Example 3:
+---------
+
+    var app = require('service/server/index.js'),
+        Rest = require('node-rest-test');
+
+    module.exports = {
+        'session': function (beforeExit, assert) {
+            var tests = new Rest(app);
+
+            tests.get('/foo', { ... }, { ... }, function (req, res) { ... })
+                 .end(beforeExit, assert);
+        }
+     };
+    
 
 Run test:
 
