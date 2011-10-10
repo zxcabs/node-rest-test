@@ -1,4 +1,4 @@
-Test REST api server using expresso and json-schema
+Test REST api server using expresso and validate-schema
 
 Install:
 --------
@@ -37,29 +37,17 @@ Example 1:
 
             tests.post('/sessions', { login: 'fedor@nikulin.ru', password: '1234' }, 
                 { 
-                    success: { type: 'boolean', enum: [true]},
+                    success: true,
                     result: { 
-                        type: 'object',
-                        properties: {
-                            sid: {
-                                type: 'string',
-                                pattern: '[\\w\\d\.\\/\\+=]{68}'
-                            }
-                         }
-                     }
+                        sid: /\w\d\.\/\+=]{68}/
+                    }
                  }
              )
              .del(function(res) {
                  return '/sessions/' + res.body.result.sid;
              }, {}, {
-                        success: {
-                            type: 'boolean',
-                            enum: [true]
-                        },
-                        result: {
-                            type: 'string',
-                            pattern: 'session destroyed'
-                       }
+                        success: true,
+                        result: /session destroyed/
                     }
             );
         }
@@ -78,29 +66,17 @@ Example 2:
 
             tests.post('/sessions', { login: 'fedor@nikulin.ru', password: '1234' }, 
                 { 
-                    success: { type: 'boolean', enum: [true]},
-                    result: { 
-                        type: 'object',
-                        properties: {
-                            sid: {
-                                type: 'string',
-                                pattern: '[\\w\\d\\.\\/\\+=]{68}'
-                            }
-                         }
-                     }
+                    success: true,
+                    result: {
+                        sid: /\w\d\.\/\+=]{68}/
+                    }
                  }
              )
              .del(function(res) {
                  return '/sessions/' + res.body.result.sid;
              }, {}, {
-                        success: {
-                            type: 'boolean',
-                            enum: [true]
-                        },
-                        result: {
-                            type: 'string',
-                            pattern: 'session destroyed'
-                       }
+                        success: true,
+                        result: 'session destroyed'
                     }
             )
             .end(beforeExit, assert);
